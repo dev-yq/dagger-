@@ -6,14 +6,20 @@ import android.support.annotation.RequiresApi
 import com.easyfuture.com.logger.LoggerFactory
 import com.easyfuture.com.net.ApiService
 import com.easyfuture.com.utils.RxScduler
-import java.lang.reflect.ParameterizedType
-import java.lang.reflect.Type
 
 
 /*
 * refrofit发送网络请求
 * */
-class   RetofitHttpRequst( var apiService: ApiService):HttpRequst{
+class   RetofitHttpRequst( var apiService: ApiService ):HttpRequst{
+   private lateinit var   converAdapterFacotry: ConverAdapterFacotry
+    override fun addConverFacoty(converAdapterFacotry: ConverAdapterFacotry): ConverAdapterFacotry {
+
+
+        this.converAdapterFacotry = converAdapterFacotry;
+        return  converAdapterFacotry
+    }
+
 
     override fun <T> excuteGet(url: String, map: Map<String, String>, httpResonse: Resonse<T>) {
         if (map.isEmpty()){
@@ -21,7 +27,6 @@ class   RetofitHttpRequst( var apiService: ApiService):HttpRequst{
         }
 
         else{
-
 
         }
 
@@ -31,46 +36,38 @@ class   RetofitHttpRequst( var apiService: ApiService):HttpRequst{
     @RequiresApi(Build.VERSION_CODES.P)
     override fun<T> excutePost(url: String, map: Map<String, String>, resonse: Resonse<T>) {
         if (map.isEmpty()){
-
             apiService.httpNoPamas(url)
                 .compose(RxScduler.applySchedulers())
-                .subscribe({
-                        s->
+                .subscribe { s->
                     LoggerFactory.e("数据返回结果${s}")
-                    RealConverResponse<T>(resonse).conver(s ,getClass(resonse))
+
+                    if (converAdapterFacotry == null){
+
+                        throw  NullPointerException()
+                        return@subscribe
+                    }
+                    converAdapterFacotry.converResponseBody(s,resonse)
 
 
-
-                })
+                }
         }
-
 
         else{
             apiService.httpPostByQuery(url ,map)
                 .compose(RxScduler.applySchedulers())
-                .subscribe({
-                    s->
+                .subscribe { s->
                     LoggerFactory.e("数据返回结果${s}")
+                    if (converAdapterFacotry == null){
 
-                    RealConverResponse<T>(resonse).conver(s ,getClass(resonse))
+                        throw  NullPointerException()
+                        return@subscribe
+                    }
+                    converAdapterFacotry.converResponseBody(s,resonse)
 
-                })
+                }
         }
 
-
-
-
     }
-
-
-    fun          <T>getClass(resonse: Resonse<T>):Class<T>{
-        lateinit   var s:Class<T>
-        var  parameterizedType:ParameterizedType  =resonse.javaClass.genericInterfaces[0] as ParameterizedType
-        s  =   parameterizedType.actualTypeArguments[0] as Class<T>
-        LoggerFactory.e("方法返回类型=====:${s}")
-        return   s
-    }
-
 
 
 

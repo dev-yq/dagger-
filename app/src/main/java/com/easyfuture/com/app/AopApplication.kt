@@ -15,9 +15,6 @@ class   AopApplication:Application() ,HasActivityInjector{
 
     @Inject
     lateinit var   dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
-    init {
-
-    }
 
     override fun onCreate() {
         super.onCreate()
@@ -25,15 +22,8 @@ class   AopApplication:Application() ,HasActivityInjector{
         init()
 
 
-
-
-
-
-
     }
     private fun init() {
-
-
         DaggerDaggerConpont.builder()
             .AopApplication(this)
             .ApplicationModul(ApplicationModul(this))

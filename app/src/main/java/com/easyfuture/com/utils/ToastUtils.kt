@@ -2,7 +2,6 @@ package com.easyfuture.com.utils
 
 import android.content.Context
 import android.widget.Toast
-import com.easyfuture.com.aop.LoginActivity
 
 
 /*
@@ -21,5 +20,8 @@ class  ToastUtils{
 
 
     }
+
+
+
 
 }

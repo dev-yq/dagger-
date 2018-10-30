@@ -1,13 +1,10 @@
 package com.easyfuture.com.modul
 
-import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import com.easyfuture.com.app.AopApplication
 import com.easyfuture.com.datasource.*
-import com.easyfuture.com.logger.LoggerFactory
 import com.easyfuture.com.net.ApiService
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -34,7 +31,11 @@ class  ApplicationModul( var  aopApplications: AopApplication){
     //真是网络请求
     @Singleton
     @Provides
-   fun   providerHttpRequst(apiService: ApiService):HttpRequst = RetofitHttpRequst(apiService)
+   fun   providerHttpRequst(apiService: ApiService):HttpRequst{
+        var  retofitHttpRequst  = RetofitHttpRequst(apiService)
+        retofitHttpRequst.addConverFacoty(GsonConverAdapterFactory.create())
+      return retofitHttpRequst
+    }
 
 
     //远程服务

@@ -1,9 +1,5 @@
 package com.easyfuture.com.datasource
 
-import android.content.SharedPreferences
-import com.easyfuture.com.net.ApiService
-import com.easyfuture.combean.Login.Login
-import io.reactivex.Observable
 import javax.inject.Inject
 
 
@@ -21,6 +17,7 @@ class  RepositoryFactory @Inject constructor(var
     override fun addBool(key: String, value: Boolean) {
 
         shareprefSource.addBool(key, value)
+
     }
 
 
@@ -64,7 +61,5 @@ class  RepositoryFactory @Inject constructor(var
     }
 
 
-
-
-
 }
+
