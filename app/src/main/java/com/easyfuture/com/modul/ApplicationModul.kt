@@ -33,7 +33,6 @@ class  ApplicationModul( var  aopApplications: AopApplication){
     @Provides
    fun   providerHttpRequst(apiService: ApiService):HttpRequst{
         var  retofitHttpRequst  = RetofitHttpRequst(apiService)
-        retofitHttpRequst.addConverFacoty(GsonConverAdapterFactory.create())
       return retofitHttpRequst
     }
 
@@ -41,7 +40,7 @@ class  ApplicationModul( var  aopApplications: AopApplication){
     //远程服务
     @Singleton
     @Provides
-    fun   providerBaseHttpDataSource(httpRequst: HttpRequst):BaseRemoveDataSource = HttpDataSource(httpRequst)
+    fun   providerBaseHttpDataSource(httpRequst: HttpRequst):BaseRemoveDataSource = HttpDataSource(httpRequst ,GsonConverAdapterFactory.create())
 
 
     //share数据存储管理
@@ -63,7 +62,6 @@ class  ApplicationModul( var  aopApplications: AopApplication){
         override fun intercept(chain: Interceptor.Chain?): Response {
             var request : Request = chain!!.request();
             return   chain!!.proceed(request)
-
 
         }
 

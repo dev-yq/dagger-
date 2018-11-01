@@ -1,6 +1,5 @@
 package com.easyfuture.com.logger
 
-import android.os.Debug
 import android.util.Log
 import com.easyfuture.com.aop.BuildConfig
 
@@ -14,7 +13,6 @@ class  LoggerFactory{
         var  boolean: Boolean = BuildConfig.DEBUG
         var  TAG = LoggerFactory::class.java.canonicalName
         fun   e(msg:String){
-
             if (boolean)
             Log.e(TAG,msg)
         }

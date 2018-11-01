@@ -1,20 +1,17 @@
-package com.easyfuture.com.datasource
+package com.easyfuture.com.net.net
 
 import android.annotation.SuppressLint
 import android.os.Build
 import android.support.annotation.RequiresApi
-import com.easyfuture.com.logger.LoggerFactory
-import com.easyfuture.com.net.ApiService
-import com.easyfuture.com.utils.RxScduler
-
+import com.easyfuture.com.net.logger.LoggerFactory
+import com.easyfuture.com.net.utils.RxScduler
 
 /*
 * refrofit发送网络请求
 * */
-class   RetofitHttpRequst( var apiService: ApiService ):HttpRequst{
+class   RetofitHttpRequst( var apiService: ApiService):HttpRequst{
    private lateinit var   converAdapterFacotry: ConverAdapterFacotry
     override fun addConverFacoty(converAdapterFacotry: ConverAdapterFacotry): ConverAdapterFacotry {
-
 
         this.converAdapterFacotry = converAdapterFacotry;
         return  converAdapterFacotry
@@ -71,7 +68,5 @@ class   RetofitHttpRequst( var apiService: ApiService ):HttpRequst{
 
 
 
-
-
-
+    
 }

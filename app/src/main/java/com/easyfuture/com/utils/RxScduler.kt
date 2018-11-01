@@ -18,7 +18,9 @@ companion object {
             upstream ->
             upstream.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+
         }
+
 
 
     }

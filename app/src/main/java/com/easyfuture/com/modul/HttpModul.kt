@@ -20,6 +20,7 @@ class HttpModul {
         .Builder()
         .connectTimeout(50,TimeUnit.SECONDS)
         .readTimeout(50,TimeUnit.SECONDS)
+
         .addInterceptor(netInterrupter)
         .build()
 
@@ -29,9 +30,9 @@ class HttpModul {
         .baseUrl("http://www.wanandroid.com/")
 
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+
         .addConverterFactory(ScalarsConverterFactory.create())
         .build()
-
 
     @Provides
     fun   provideApiService(retrofit: Retrofit)= retrofit.create(ApiService::class.java)

@@ -1,14 +1,13 @@
-package com.easyfuture.com.datasource
+package com.easyfuture.com.net.net
 
-import com.easyfuture.com.logger.LoggerFactory
+
+import com.easyfuture.com.net.logger.LoggerFactory
 import java.lang.reflect.ParameterizedType
 
 
 //数据解析器
 class  StringConverAdapterFactory:ConverAdapterFacotry{
     override fun <T> converResponseBody(string: String, resonse: Resonse<T>) {
-
-
 
         var  cl:Class<T> = getClass(resonse)
 
